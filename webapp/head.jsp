@@ -14,7 +14,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="${ctx}/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -25,10 +25,13 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script-->
+    <script src="${ctx}/js/jquery-2.0.3.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="${ctx}/js/fileinput.min.js" type="text/javascript"></script>
+    <script src="${ctx}/js/fileinput_locale_zh.js" type="text/javascript"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="${ctx}/js/ajaxfileupload.js" type="text/javascript"></script>
   </head>
 
 </html>
