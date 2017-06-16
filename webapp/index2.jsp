@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="/page/head.jsp" %>
+<%@include file="/head.jsp" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -69,7 +69,7 @@
 		        <div class="kv-main">
 		            <br>
 		                <div class="form-group">
-		                    <input id="imagesFile" name="imagesFile" type="file" multiple=true >
+		                    <input id="imageFiles" name="imageFiles" type="file" multiple class="file" data-overwrite-initial="false">
 		                </div>
 		        </div>
 		      </div>
@@ -82,7 +82,7 @@
 	  </div>
 	</div><!-- end modal -->
 	
-	<%@include file="/page/foot.jsp" %>
+	<%@include file="/foot.jsp" %>
   </body>
   <script type="text/javascript">
   	$(function(){
@@ -93,13 +93,13 @@
 		    function() {
 		        loadLifeList();
 		    });
+		
 	});
 	
 	function loadLifeList(){
 		$.ajax({
 			type: "post",
 			url: "${ctx}/index/loadLifeList.do",
-			timeout: 100,
 			success: function(data){
 				$("#lifeList").html(data);
 			},
@@ -107,7 +107,8 @@
 		});
 	}
 	
-	$("#imagesFile").fileinput({
+	$("#imageFiles").fileinput({
+		//uploadUrl: '${ctx}/index/saveLifeImages.do',
 		language: 'zh', //设置语言
 		showUpload: false,
 		showRemove: false,
@@ -120,24 +121,20 @@
 	});
 	
 	function saveLife(){
-		var formData = new FormData($( "#lifeImagesForm" )[0]);  
-		console.info("formData: " + formData);
-	     $.ajax({  
-	          url: '${ctx}/index/saveLifeImages.do' ,  
-	          type: 'POST',  
-	          data: formData,  
-	          async: false,  
-	          cache: false,  
-	          contentType: false,  
-	          processData: false,  
-	          success: function (returndata) {  
-	              alert(returndata);  
-	          },  
-	          error: function (returndata) {  
-	              alert(returndata);  
-	          }  
-	     });
-		$('#lifeModal').modal('hide');
+	     
+		$.ajaxFileUpload({
+			url:'${ctx}/index/saveLifeImages.do', //用于文件上传的服务器端请求地址
+			secureuri: false, //一般设置为false
+			fileElementId: 'imageFiles', //文件上传空间的id属性  <input type="file" id="file" name="file" />
+           //  dataType: 'json', //返回值类型 一般设置为json
+			success: function (data){  //服务器成功响应处理函数
+				$('#lifeModal').modal('hide');
+			},
+			error: function (data, status, e)//服务器响应失败处理函数
+			{
+				alert(data);
+			}
+        });
 	}
   </script>
 </html>

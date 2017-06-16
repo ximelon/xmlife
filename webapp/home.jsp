@@ -20,7 +20,7 @@
 	            <div class="col-md-8 col-md-offset-2 text-xs-center">
 	                <h3 class="mbr-section-title display-2">西&nbsp;&nbsp;瓜&nbsp;&nbsp;傳</h3>
 	                <div class="lead"><p>偷得浮生半日閑</p></div>
-	                <div><a class="btn btn-info" href="${ctx}/lifeManage/addLife}"><span class="mbri-image-gallery mbr-iconfont mbr-iconfont-btn"></span>閑&nbsp;記</a></div>
+	                <div><a class="btn btn-info" href="${}/lifeManage/addLife}"><span class="mbri-image-gallery mbr-iconfont mbr-iconfont-btn"></span>閑&nbsp;記</a></div>
 	            </div>
 	        </div>
 	    </div>

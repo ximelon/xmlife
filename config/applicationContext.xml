@@ -17,4 +17,5 @@
     					http://www.springframework.org/schema/cache
     					http://www.springframework.org/schema/cache/spring-cache.xsd">
     
+    <ctx:component-scan base-package="com.ximelon.xmlife.config" />
 </beans>
