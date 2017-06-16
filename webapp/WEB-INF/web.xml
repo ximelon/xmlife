@@ -10,6 +10,10 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
     </listener>  
     
+    <listener>
+        <listener-class>org.apache.tiles.extras.complete.CompleteAutoloadTilesListener</listener-class>
+    </listener>
+    
     <!-- Spring MVC入口Servlet，经请求分发给各个Controller处理 -->
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
@@ -31,7 +35,7 @@
 	</servlet-mapping>
 	
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>home.jsp</welcome-file>
 	</welcome-file-list>
 	
 </web-app>

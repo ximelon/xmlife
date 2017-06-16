@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="/head.jsp" %>
+<%@include file="/header.jsp" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -9,81 +9,31 @@
   	</script>
   </head>
   <body>
-    <div class="container" style="padding-top: 5em;">
-		<div class="row clearfix">
-			<div class="col-md-12 column">
-				<div class="jumbotron">
-					<h1>Melon Life</h1>
-					<p>Just Record Melon Life.</p>
-					<p>
-						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#lifeModal">
-						记录
-						</button>
-					</p>
-				</div>
-				<div class="row" id="lifeList"></div>
-				
-				<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">MLife</a>
-				</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li class="active">
-							 <a href="#">Link</a>
-						</li>
-						<li>
-							 <a href="#">Link</a>
-						</li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-							 <a href="#">Link</a>
-						</li>
-						<li class="dropdown">
-							 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>
-							<ul class="dropdown-menu">
-								<li>
-									 <a href="#">Action</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-				</nav>
-			</div>
-		</div>
-	</div>
+	<%@ include file="/menu.jsp" %>
 	
-	<!-- Modal -->
-	<div class="modal fade" id="lifeModal" tabindex="-1" role="dialog" aria-labelledby="lifeModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="lifeModalLabel">记录点滴人生</h4>
-	      </div>
-          <form id="lifeImagesForm" enctype="multipart/form-data">
-		      <div class="modal-body">
-		        <div class="kv-main">
-		            <br>
-		                <div class="form-group">
-		                    <input id="imageFiles" name="imageFiles" type="file" multiple class="file" data-overwrite-initial="false">
-		                </div>
-		        </div>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary" onclick="saveLife();">Save changes</button>
-		      </div>
-          </form>
+	<section class="engine"><a rel="external" href="https://mobirise.com">https://mobirise.com/</a></section>
+	<section class="mbr-section article mbr-parallax-background mbr-after-navbar" id="msg-box8-1l" style="background-image: url(assets/images/mbr-2000x1333.jpg); padding-top: 200px; padding-bottom: 160px;">
+	    <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(34, 34, 34);">
 	    </div>
-	  </div>
-	</div><!-- end modal -->
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-md-8 col-md-offset-2 text-xs-center">
+	                <h3 class="mbr-section-title display-2">西&nbsp;&nbsp;瓜&nbsp;&nbsp;傳</h3>
+	                <div class="lead"><p>偷得浮生半日閑</p></div>
+	                <div><a class="btn btn-info" href="${ctx}/lifeManage/addLife}"><span class="mbri-image-gallery mbr-iconfont mbr-iconfont-btn"></span>閑&nbsp;記</a></div>
+	            </div>
+	        </div>
+	    </div>
 	
-	<%@include file="/foot.jsp" %>
+	</section>
+	
+	<section class="mbr-cards mbr-section mbr-section-nopadding" id="lifeList" style="background-color: rgb(255, 255, 255);">
+	</section>
+
+  <%@include file="/footer.jsp" %>
+  <input name="animation" type="hidden">
   </body>
+  
   <script type="text/javascript">
   	$(function(){
 		loadLifeList();
@@ -99,7 +49,7 @@
 	function loadLifeList(){
 		$.ajax({
 			type: "post",
-			url: "${ctx}/index/loadLifeList.do",
+			url: "${ctx}/lifeManage/loadLifeList.do",
 			success: function(data){
 				$("#lifeList").html(data);
 			},
@@ -123,7 +73,7 @@
 	function saveLife(){
 	     
 		$.ajaxFileUpload({
-			url:'${ctx}/index/saveLifeImages.do', //用于文件上传的服务器端请求地址
+			url:'${ctx}/lifeManage/saveLifeImages.do', //用于文件上传的服务器端请求地址
 			secureuri: false, //一般设置为false
 			fileElementId: 'imageFiles', //文件上传空间的id属性  <input type="file" id="file" name="file" />
            //  dataType: 'json', //返回值类型 一般设置为json
@@ -137,4 +87,5 @@
         });
 	}
   </script>
+    
 </html>

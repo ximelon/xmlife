@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="/header.jsp" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -9,8 +8,7 @@
   	</script>
   </head>
   <body>
-	<%@ include file="/menu.jsp" %>
-	
+	<%--@ include file="/menu.jsp" --%>
 	<section class="engine"><a rel="external" href="https://mobirise.com">https://mobirise.com/</a></section>
 	<section class="mbr-section article mbr-parallax-background mbr-after-navbar" id="msg-box8-1l" style="background-image: url(assets/images/mbr-2000x1333.jpg); padding-top: 200px; padding-bottom: 160px;">
 	    <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(34, 34, 34);">
@@ -20,7 +18,7 @@
 	            <div class="col-md-8 col-md-offset-2 text-xs-center">
 	                <h3 class="mbr-section-title display-2">西&nbsp;&nbsp;瓜&nbsp;&nbsp;傳</h3>
 	                <div class="lead"><p>偷得浮生半日閑</p></div>
-	                <div><a class="btn btn-info" href="${}/lifeManage/addLife}"><span class="mbri-image-gallery mbr-iconfont mbr-iconfont-btn"></span>閑&nbsp;記</a></div>
+	                <div><a class="btn btn-info" href="${ctx}/lifeManage/addLife}"><span class="mbri-image-gallery mbr-iconfont mbr-iconfont-btn"></span>閑&nbsp;記</a></div>
 	            </div>
 	        </div>
 	    </div>
@@ -30,7 +28,6 @@
 	<section class="mbr-cards mbr-section mbr-section-nopadding" id="lifeList" style="background-color: rgb(255, 255, 255);">
 	</section>
 
-  <%@include file="/footer.jsp" %>
   <input name="animation" type="hidden">
   </body>
   
