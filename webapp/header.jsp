@@ -25,6 +25,7 @@
 	<link rel="stylesheet" href="${ctx}/assets/theme/css/style.css">
 	<link rel="stylesheet" href="${ctx}/assets/mobirise-gallery/style.css">
 	<link rel="stylesheet" href="${ctx}/assets/mobirise/css/mbr-additional.css" type="text/css">
+	<link rel="stylesheet" href="${ctx}/css/fileinput.min.css" type="text/css">
 	
   </head>
 

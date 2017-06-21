@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../head.jsp" %>
+<%@include file="../header.jsp" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -191,7 +191,7 @@
     </div>
 </section>
 
-  <%@include file="/foot.jsp" %>
+  <%@include file="/footer.jsp" %>
   <input name="animation" type="hidden">
   </body>
   
