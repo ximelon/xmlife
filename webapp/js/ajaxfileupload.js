@@ -171,7 +171,9 @@ jQuery.extend({
             jQuery.globalEval( data );
         // Get the JavaScript object, if JSON is used.
         if ( type == "json" )
-            eval( "data = " + data );
+            //eval( "data = " + data );
+        	//data = jQuery.parseJSON(jquery(data).text());
+        	data = $.parseJSON(data.replace(/<.*?>/ig,""));
         // evaluate scripts within html
         if ( type == "html" )
             jQuery("<div>").html(data).evalScripts();

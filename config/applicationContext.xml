@@ -17,5 +17,78 @@
     					http://www.springframework.org/schema/cache
     					http://www.springframework.org/schema/cache/spring-cache.xsd">
     
-    <ctx:component-scan base-package="com.ximelon.xmlife.config" />
+    <ctx:component-scan base-package="
+				com.ximelon.xmlife.config,
+				com.ximelon.xmlife.dao,
+				com.ximelon.xmlife.data,
+				com.ximelon.xmlife.web"
+				/>
+    
+    <!--此bean用来告诉Spring去何处找数据库信息,有此Bean才会有下面dataSource中用${}标记来取变量的语句 -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate"
+		p:sessionFactory-ref="sessionFactory" />
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" 
+		p:driverClassName="${driverClassName}" 
+		p:url="${url}" 
+		p:username="${username}" 
+		p:password="${password}"
+		p:maxIdle="${maxIdle}"
+		p:minIdle="${minIdle}"
+		p:maxActive="${maxActive}" 
+		p:maxWait="${maxWait}"
+		p:testOnBorrow="${testOnBorrow}"
+		p:testOnReturn="${testOnReturn}"
+		p:testWhileIdle="${testWhileIdle}"
+		p:validationQuery="${validationQuery}"
+		p:validationQueryTimeout="${validationQueryTimeout}"
+		p:timeBetweenEvictionRunsMillis="${timeBetweenEvictionRunsMillis}"
+		p:minEvictableIdleTimeMillis="${minEvictableIdleTimeMillis}"/>
+	
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+	    <property name="dataSource" ref="dataSource" />
+	    <property name="packagesToScan" value="com.ximelon.xmlife.data" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.connection.oracle.jdbc.V8Compatible">true</prop>  
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="format_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 事务管理器 -->
+    <bean id="txManager"
+        class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <!-- 开启通过注解@Transactional管理事务 -->
+    <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
+
+    <!-- 事务 -->
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="query*" read-only="true" propagation="REQUIRED" />
+            <tx:method name="find*" read-only="true" propagation="REQUIRED" />
+            <tx:method name="*" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 配置AOP -->
+    <aop:config proxy-target-class="true">
+        <aop:pointcut expression="execution(* *..service..*Service*.*(..))" id="serviceMethod" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod" />
+    </aop:config>
+    
 </beans>

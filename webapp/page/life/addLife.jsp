@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../header.jsp" %>
+<%@ include file="/page/util/common.jsp"%>
+<%@include file="/header.jsp" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -101,10 +102,10 @@
 			url:'${ctx}/lifeManage/saveLifeImages.do', //用于文件上传的服务器端请求地址
 			secureuri: false, //一般设置为false
 			fileElementId: 'imageFiles', //文件上传空间的id属性  <input type="file" id="file" name="file" />
-           //  dataType: 'json', //返回值类型 一般设置为json
+           	dataType: 'json', //返回值类型 一般设置为json
             data: {"albumTitle": albumTitle, "subTitle": subTitle},
 			success: function (data){  //服务器成功响应处理函数
-				
+				window.location.href="${ctx}/lifeManage/toAlbumIndex.do?albumId="+data.msg;
 			},
 			error: function (data, status, e)//服务器响应失败处理函数
 			{

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../header.jsp" %>
+<%@include file="/header.jsp" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -197,13 +197,13 @@
   
   <script type="text/javascript">
   	$(function(){
-		loadLifeList();
+		//loadLifeList();
 		
 		/*监听modal关闭*/
-		$('#lifeModal').on('hide.bs.modal',
-		    function() {
-		        loadLifeList();
-		    });
+		//$('#lifeModal').on('hide.bs.modal',
+		    //function() {
+		    //    loadLifeList();
+		    //});
 		
 	});
 	
