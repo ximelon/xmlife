@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ximelon.xmlife.bean.OperationResult;
 import com.ximelon.xmlife.data.Album;
 import com.ximelon.xmlife.web.service.ILifeManageService;
+import com.ximelon.xmlife.web.util.Constant;
 
 /**
  * 传记管理
@@ -68,7 +69,7 @@ public class LifeManageController {
 				return OperationResult.ERROR("");
 			}
 			
-			File albumFolder = new File(request.getSession().getServletContext().getRealPath("/") + "/lifeAlbum/" + album.getAlbumTitle());
+			File albumFolder = new File(request.getSession().getServletContext().getRealPath("/") + Constant.LIFE_ALBUM_PATH + album.getAlbumTitle());
 			if(!albumFolder.exists()){
 				albumFolder.mkdirs();
 			}
@@ -79,7 +80,7 @@ public class LifeManageController {
 //				String uuidName = UUID.randomUUID().toString().replace("-","");
 //				String filePath = albumFolder + File.separator + uuidName + postfix; 
 				String filePath = albumFolder + File.separator + "background.jpg"; 
-				album.setBackgroundImagePath(filePath);
+				album.setBackgroundImagePath(Constant.LIFE_ALBUM_PATH + album.getAlbumTitle() + File.separator + "background.jpg");
 				try {
 					file.transferTo(new File(filePath));
 				} catch (IOException e) {
@@ -93,11 +94,5 @@ public class LifeManageController {
 		return OperationResult.ERROR("");
 	}
 	
-	@RequestMapping("toAlbumIndex.do")
-	public ModelAndView toAlbumIndex(Long albumId){
-		Album album = lifeManageService.getAlbumById(albumId);
-		ModelAndView mav = new ModelAndView("album/albumIndex");
-		return mav;
-	}
 
 }

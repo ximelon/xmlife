@@ -1,7 +1,7 @@
 package com.ximelon.xmlife.data;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 /**
@@ -33,7 +34,7 @@ public class Album implements Serializable{
 	
 	private String backgroundImagePath;		//纪念册背景图路径
 	
-	private List<Photo> photo;				//照片
+	private Set<Photo> photo;				//照片
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -74,11 +75,12 @@ public class Album implements Serializable{
 
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="ALBUM_ID")
-	public List<Photo> getPhoto() {
+	@OrderBy("UPLOAD_TIME DESC") 
+	public Set<Photo> getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(List<Photo> photo) {
+	public void setPhoto(Set<Photo> photo) {
 		this.photo = photo;
 	}
 

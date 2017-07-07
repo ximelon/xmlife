@@ -6,10 +6,11 @@
             <div class="mbr-table">
                 <div class="mbr-table-cell">
                     <div class="navbar-brand">
-                        <a href="https://www.ximelon.com" class="navbar-logo"><img src="${ctx}/assets/images/logo.png" alt="Mobirise"></a>
+                        <a href="https://www.ximelon.com" class="navbar-logo"><img src="${ctx}/images/logo1.png" alt="Mobirise"></a>
                         <a class="navbar-caption" href="https://www.ximelon.com">MELIFE</a>
                     </div>
                 </div>
+                <!-- 
                 <div class="mbr-table-cell">
                     <button class="navbar-toggler pull-xs-right hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
                         <div class="hamburger-icon"></div>
@@ -19,6 +20,7 @@
                         <div class="close-icon"></div>
                     </button>
                 </div>
+                 -->
             </div>
         </div>
     </nav>

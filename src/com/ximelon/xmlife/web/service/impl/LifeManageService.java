@@ -22,7 +22,7 @@ public class LifeManageService implements ILifeManageService {
 
 	@Override
 	public List<Album> getAllAlbum() {
-		return genericDao.getAllObject(Album.class);
+		return genericDao.findByHql("from Album order by id desc", Album.class);
 	}
 
 	@Override
