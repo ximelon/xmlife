@@ -1,0 +1,4 @@
+[INFO ] 07-17 15:18:43.421|相册保存成功 |com.ximelon.xmlife.web.controller.LifeManageController.saveLife(67)
+[INFO ] 07-17 15:24:39.700|图片保存成功，43 |com.ximelon.xmlife.web.controller.AlbumManageController.savePhoto(75)
+[INFO ] 07-17 15:25:57.528|图片保存成功，44 |com.ximelon.xmlife.web.controller.AlbumManageController.savePhoto(75)
+[INFO ] 07-17 15:26:26.355|图片保存成功，45 |com.ximelon.xmlife.web.controller.AlbumManageController.savePhoto(75)

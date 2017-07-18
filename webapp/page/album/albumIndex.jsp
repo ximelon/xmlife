@@ -11,7 +11,7 @@
   <body>
 	<%@ include file="/menu.jsp" %>
 	
-<section class="engine"></section><section class="mbr-section article mbr-parallax-background mbr-after-navbar" id="msg-box8-l" style="background-image: url(${ctx}/lifeAlbum/${album.albumTitle }/background.jpg); padding-top: 160px; padding-bottom: 40px;">
+<section class="engine"></section><section class="mbr-section article mbr-parallax-background mbr-after-navbar" id="msg-box8-l" style="background-image: url(${album.backgroundImagePath }); padding-top: 160px; padding-bottom: 40px;">
 
     <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(34, 34, 34);">
     </div>
@@ -49,7 +49,8 @@
 	                	<c:forEach var="photoPath" items="${photo.paths }" varStatus="pathStat">
 		                    <div class="mbr-gallery-item mbr-gallery-item__mobirise3 mbr-gallery-item--p1" data-tags="Awesome" data-video-url="false">
 		                        <div href="#lb-gallery3-${photoStat.index }" data-slide-to="${pathStat.index }" data-toggle="modal">
-		                            <img alt="" src="${ctx}${photoPath.path}">
+		                            <!-- img alt="" src="${ctx}${photoPath.path}"-->
+		                            <img alt="" src="${photoPath.path}">
 		                            <span class="icon-focus"></span>
 		                        </div>
 		                    </div>
@@ -73,7 +74,7 @@
                     <div class="carousel-inner">
                     	<c:forEach var="photoPath" items="${photo.paths }" varStatus="pathStat">
 	                        <div  <c:if test="${pathStat.index==0 }">class="carousel-item active"</c:if> <c:if test="${pathStat.index!=0 }">class="carousel-item"</c:if> >
-	                            <img alt="" src="${ctx}${photoPath.path}">
+	                            <img alt="" src="${photoPath.path}">
 	                        </div>
 	                    </c:forEach>
                     </div>

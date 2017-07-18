@@ -5,8 +5,6 @@
 <html lang="zh-CN">
   <head>
     <title>MLife Home</title>
-    <link href="${ctx}/css/resizeImgCommon.css" type="text/css" rel="stylesheet"/>
-	<link href="${ctx}/css/resizeImg.css" type="text/css" rel="stylesheet"/>
     <script type="text/javascript">
   	
   	</script>
@@ -25,7 +23,7 @@
 	                        <div hidden="" data-form-alert-success="true" class="alert alert-form alert-success text-xs-center">Thanks for filling out form!</div>
 	                    </div>
 	
-	                    <form id="photoForm" data-form-title="CONTACT FORM">
+	                    <form id="photoForm" enctype="multipart/form-data" action="" method="post" data-form-title="CONTACT FORM">
 	                    	<input type="hidden" name="albumId" id="albumId" value="${albumId}"/>
 	                        <div class="row row-sm-offset">
 	                            <div class="col-xs-12 col-md-6">
@@ -37,14 +35,8 @@
 	                        </div>
 	                        <div class="form-group">
 	                        	<div class="kv-main">
-									<section class=" img-section">
-										<div class="z_photo upimg-div clear" >
-							               	 <section class="z_file fl">
-							               	 	<img src="${ctx}/images/a11.png" class="add-img">
-							               	 	<input type="file" name="photos" id="photos" class="files" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" multiple />
-							               	 </section>
-								         </div>
-									 </section>
+		                            <label class="form-control-label" for="form1-1f-message">照片</label>
+		                            <input id="imageFiles" name="imageFiles" type="file" multiple class="file" data-overwrite-initial="false">
 	                        	</div>
 	                        </div>
 	                        <div><button type="button" class="btn btn-info" onclick="savePhoto();">发 布</button></div>
@@ -54,28 +46,57 @@
 	        </div>
 	    </div>
 	</section>
+
   	<%@include file="/footer.jsp" %>
   <input name="animation" type="hidden">
   </body>
-  <script src="${ctx}/js/resizeImage.js"></script>
-  <script type="text/javascript">
   
-  	var sendDatas = [];	//图片dataUrls
-	
+  <script type="text/javascript">
   	$(function(){
-  		$("#menu-1c").children("nav.transparent").attr("class", "navbar navbar-dropdown bg-color navbar-fixed-top");
-  	});
-  	
-  	function savePhoto(){
-  		var mood = $("#mood").val();
+		$("#menu-1c").children("nav.transparent").attr("class", "navbar navbar-dropdown bg-color navbar-fixed-top");
+	});
+	
+	
+	$("#imageFiles").fileinput({
+		//uploadUrl: '${ctx}/index/saveLifeImages.do',
+		showPreview:true,
+		resizeImage:true,
+		maxImageWidth: 200,
+		maxImageHeight: 200,
+		resizePreference: 'width',
+		resizeImageQuality: 0.9,
+		
+		language: 'zh', //设置语言
+		showUpload: false,
+		showRemove: false,
+		showCancel: false,
+		showCaption: false,//是否显示标题
+		browseClass: "btn btn-primary",
+		//fileType: "any",
+		allowedPreviewTypes: ['image'],
+        allowedFileExtensions:  ['jpg', 'png','jpeg'],
+        maxFileSize: 2000
+	});
+	
+	function savePhoto(){
+		var mood = $("#mood").val();
 		var albumId = $("#albumId").val();
-  		$.post('${ctx}/albumManage/savePhoto.do',{"mood": mood, "albumId": albumId, "dataUrls":JSON.stringify(sendDatas)},function(data){  
-            if(data.status == 'OK'){  
-          	  window.location.href="${ctx}/albumManage/toAlbumIndex.do?albumId="+data.msg;
-            }else{  
-            }  
+	     
+		$.ajaxFileUpload({
+			url:'${ctx}/albumManage/savePhotos.do', //用于文件上传的服务器端请求地址
+			secureuri: false, //一般设置为false
+			fileElementId: 'imageFiles', //文件上传空间的id属性  <input type="file" id="file" name="file" />
+           	dataType: 'json', //返回值类型 一般设置为json
+            data: {"mood": mood, "albumId": albumId},
+			success: function (data){  //服务器成功响应处理函数
+				window.location.href="${ctx}/albumManage/toAlbumIndex.do?albumId="+data.msg;
+			},
+			error: function (data, status, e)//服务器响应失败处理函数
+			{
+				alert(data);
+			}
         });
-  	}
+	}
   </script>
     
 </html>

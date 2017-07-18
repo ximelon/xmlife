@@ -2,9 +2,11 @@ apply plugin: 'war'
 apply plugin: 'eclipse'
 
 sourceCompatibility = 1.8
-archivesBaseName = 'web'
+archivesBaseName = 'xmlife'
 webAppDirName = 'webapp'    // 设置 WebApp 根目录
-version = '1.0'
+version = ''
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 // 设置 Java 源码所在目录  
 sourceSets {  
@@ -59,6 +61,8 @@ dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.7'
     compile group: 'dom4j', name: 'dom4j', version: '1.6.1'
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.6'
     testCompile group: 'junit', name: 'junit', version: '4.+'
 }
 

@@ -10,7 +10,7 @@
                   <div class="card-img"><a href="${ctx}/albumManage/toAlbumIndex.do?albumId=${album.id}"><img src="${ctx}${album.backgroundImagePath }" class="card-img-top"></a></div>
                   <div class="card-block">
                     <h4 class="card-title">${album.albumTitle }</h4>
-                    <h5 class="card-subtitle">${album.subTitle }</h5>
+                    <font color="#8E8E8E">${album.subTitle }</font>
                     </div>
                 </div>
             </div>
