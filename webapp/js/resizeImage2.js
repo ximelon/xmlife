@@ -1,9 +1,7 @@
 /**
  * 图片压缩成base64编码
- * 单图片上传
- * 
+ * 多图片上传
  */
-document.write("<script language=javascript src='../js/exif.js'></script>");
 $(function(){
 
 	var delParent;
@@ -21,14 +19,13 @@ $(function(){
 		console.log(fileList+"======filelist=====");
 		var input = $(this).parent();//文本框的父亲元素
 		var imgArr = [];
-		$(".up-section").remove();
 		//遍历得到的图片文件
 		var numUp = imgContainer.find(".up-section").length;
 		var totalNum = numUp + fileList.length;  //总的数量
-		if(fileList.length > 1 || totalNum > 1 ){
+		if(fileList.length > 9 || totalNum > 9 ){
 			alert("上传图片数目不可以超过9个，请重新选择");  //一次选择上传超过5个 或者是已经上传和这次上传的到的总数也不可以超过5个
 		}
-		else if(numUp < 2){
+		else if(numUp < 9){
 			fileList = validateUp(fileList);
 			for(var i = 0;i<fileList.length;i++){
 
@@ -42,6 +39,15 @@ $(function(){
 			     imgContainer.prepend($section);
 			 var $span = $("<span class='up-span'>");
 			     $span.appendTo($section);
+			
+			     /*
+		     var $img0 = $("<img class='close-upimg'>").on("click",function(event){
+				    event.preventDefault();
+					event.stopPropagation();
+					$(".works-mask").show();
+					delParent = $(this).parent();
+				});   
+				$img0.attr("src","img/a7.png").appendTo($section);*/
 		     var $img = $("<img class='up-img up-opcity'>");
 		         $img.attr("src",imgArr[i]);
 		         $img.appendTo($section);
@@ -51,15 +57,10 @@ $(function(){
 		         $input.appendTo($section);
 		     var $input2 = $("<input id='tags' name='tags' value='' type='hidden'/>");
 		         $input2.appendTo($section);
-		         
-		     var orientation;
-		     //EXIF js 可以读取图片的元信息 https://github.com/exif-js/exif-js
-		     EXIF.getData(_file,function(){
-		    	 orientation=EXIF.getTag(this,'Orientation');
-		     });
 
 		     //开始压缩
 		     if(/image\/\w+/.test(fileType)){  
+	        	console.log('图片上传中...', function(){});  
 	            var fileReader = new FileReader();  
 	            fileReader.readAsDataURL(_file);  
 	            fileReader.onload = function(event){  
@@ -67,7 +68,6 @@ $(function(){
 	                var image = new Image();  
 	                image.src = result;  
 	                image.onload = function(){  //创建一个image对象，给canvas绘制使用  
-	                	var degree=0,drawWidth,drawHeight,width,height;
 	                    var cvs = document.createElement('canvas');  
 	                    var scale = 1;    
 	                    if(this.width > 800 || this.height > 800){  //1000只是示例，可以根据具体的要求去设定    
@@ -77,41 +77,13 @@ $(function(){
 	                            scale = 800 / this.height;    
 	                        }    
 	                    }  
-	                    width = this.width*scale;
-						height = this.height*scale;     //计算等比缩小后图片宽高  
-						cvs.width = drawWidth = width;
-						cvs.height = drawHeight = height;
+	                    cvs.width = this.width*scale;    
+	                                    cvs.height = this.height*scale;     //计算等比缩小后图片宽高  
 	                    var ctx = cvs.getContext('2d');    
-	                  //判断图片方向，重置canvas大小，确定旋转角度，iphone默认的是home键在右方的横屏拍摄方式
-						switch(orientation){
-						    //iphone横屏拍摄，此时home键在左侧
-							case 3:
-								degree=180;
-								drawWidth=-width;
-								drawHeight=-height;
-								break;
-						    //iphone竖屏拍摄，此时home键在下方(正常拿手机的方向)
-						    case 6:
-						    	cvs.width=height;
-						    	cvs.height=width; 
-						    	degree=90;
-						    	drawWidth=width;
-						    	drawHeight=-height;
-						    	break;
-						    //iphone竖屏拍摄，此时home键在上方
-						    case 8:
-						    	cvs.width=height;
-						    	cvs.height=width; 
-						    	degree=270;
-						    	drawWidth=-width;
-						    	drawHeight=height;
-						    	break;
-						}
-						ctx.rotate(degree*Math.PI/180);
-						ctx.drawImage(this, 0, 0, drawWidth, drawHeight);     
-	                    var newImageData = cvs.toDataURL(fileType, 0.5);   //重新生成图片，<span style="font-family: Arial, Helvetica, sans-serif;">fileType为用户选择的图片类型</span>  
+	                    ctx.drawImage(this, 0, 0, cvs.width, cvs.height);     
+	                    var newImageData = cvs.toDataURL(fileType, 0.3);   //重新生成图片，<span style="font-family: Arial, Helvetica, sans-serif;">fileType为用户选择的图片类型</span>  
 	                    //var sendData = newImageData.replace("data:"+fileType+";base64,",'');  
-	                    dataUrl=newImageData;
+	                    sendDatas.push(newImageData);
 	                }  
 	                  
 	            }  
@@ -124,7 +96,7 @@ $(function(){
 		 	 $(".up-img").removeClass("up-opcity");
 		 },450);
 		 numUp = imgContainer.find(".up-section").length;
-		if(numUp >= 2){
+		if(numUp >= 9){
 			$(this).parent().hide();
 		}
 		
@@ -140,7 +112,7 @@ $(function(){
 	$(".wsdel-ok").click(function(){
 		$(".works-mask").hide();
 		var numUp = delParent.siblings().length;
-		if(numUp < 2){
+		if(numUp < 10){
 			delParent.parent().find(".z_file").show();
 		}
 		console.info("delParent: "+ delParent);

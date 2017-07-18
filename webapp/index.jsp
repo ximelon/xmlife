@@ -11,7 +11,7 @@
   <body>
 	<%@ include file="/menu.jsp" %>
 	<div id="content">
-	<section class="mbr-section article mbr-parallax-background mbr-after-navbar" id="msg-box8-1l" style="background-image: url(images/index.jpeg); padding-top: 200px; padding-bottom: 160px;">
+	<section class="mbr-section article mbr-parallax-background mbr-after-navbar" id="msg-box8-1l" style="background-image: url(images/index.jpg); padding-top: 200px; padding-bottom: 160px;">
 	    <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(34, 34, 34);">
 	    </div>
 	    <div class="container">
